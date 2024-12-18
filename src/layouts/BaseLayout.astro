@@ -1,0 +1,32 @@
+---
+import "../styles/global.css";
+//import Navigation from "../components/Navigation.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { normalizeTheLocale } from "astro:i18n";
+
+const { pageTitle } = Astro.props;  
+// `Astro.props` 是 Astro 框架中用于获取传递给组件的属性的对象。在 BaseLayout.astro 文件中，`Astro.props` 对应的是传递给 `BaseLayout` 组件的所有属性。
+// 例如，如果你在某个页面中使用 `BaseLayout` 组件，并传递了 `pageTitle` 属性，那么 `Astro.props` 就会包含这个 `pageTitle` 属性。
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<Header />
+
+		<h1>{pageTitle}</h1>
+        <slot />
+		<Footer />
+		<script>
+			import "../scripts/menu.js";
+		</script>
+	</body>
+</html>

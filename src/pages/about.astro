@@ -1,8 +1,6 @@
 ---
 import "../styles/global.css";
-import Navigation from "../components/Navigation.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "关于我";
 
@@ -23,85 +21,61 @@ const skillColor = "navy";
 const fontWeight = "bold";
 const textCase = "uppercase";
 ---
+<BaseLayout pageTitle={pageTitle}>
+    <style define:vars={{ skillColor, fontWeight, textCase }}>
+        h1 {
+            color: purple;
+            font-size: 4rem;
+        }
+        .skill {
+            color: var(--skillColor);
+            font-weight: var(--fontWeight);
+            text-transform: var(--textCase);
+        }
+    </style>
+    <h2>关于</h2>
 
-<html lang="zh">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-        <!-- <style define:vars={{skillColor}}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: bold;
-            }
-        </style> -->
-        <style define:vars={{ skillColor, fontWeight, textCase }}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-        </style>
-    </head>
-    <body>
-        <Header />
+    <p>
+        你好，我是 HankW。<br />
+        这是我的第一个博客项目，我给它起名为 Hanks。这个单词在英文中的意思是纵帆前缘帆环，它的主要作用是将帆固定在前桅或前索上，以便更好地控制帆的形状和位置，以适应不同的风向和航行条件。<br
+        />
+        我也希望这个博客项目能够帮助我更好地控制我的学习和记录我的成长。这个项目可以让我看见自己来时的路，让我看清自己接下来需要什么。<br
+        />
+        其实，Hanks 也与我的中文名相似，一切都是巧合。
+    </p>
 
-        <h1>{pageTitle}</h1>
-        <h2>关于</h2>
+    <p>
+        随着我完成更多教程，该站点将更新，所以请继续查看我的旅程将如何进行吧！
+    </p>
 
-        <p>
-            你好，我是 HankW。<br />
-            这是我的第一个博客项目，我给它起名为 Hanks。这个单词在英文中的意思是纵帆前缘帆环，它的主要作用是将帆固定在前桅或前索上，以便更好地控制帆的形状和位置，以适应不同的风向和航行条件。<br
-            />
-            我也希望这个博客项目能够帮助我更好地控制我的学习和记录我的成长。这个项目可以让我看见自己来时的路，让我看清自己接下来需要什么。<br
-            />
-            其实，Hanks 也与我的中文名相似，一切都是巧合。
-        </p>
-
-        <p>
-            随着我完成更多教程，该站点将更新，所以请继续查看我的旅程将如何进行吧！
-        </p>
-
-        <p>以下是关于我的几个事实：</p>
-        <ul>
-            <li>我的名字是{identity.firstName}.</li>
-            <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
-            {
-                identity.hobbies.length >= 2 && (
-                    <li>
-                        我的两个习惯：{identity.hobbies[0]}和
-                        {identity.hobbies[1]}
-                    </li>
-                )
-            }
-        </ul>
-        <p>我的技能：</p>
-        <ul>
-            {skills.map((skill) => <li class="skill">{skill}</li>)}
-        </ul>
-
-        {happy && <p>我非常乐意学习 Astro！</p>}
-
-        {finished && <p>我完成了这节教程！</p>}
-
+    <p>以下是关于我的几个事实：</p>
+    <ul>
+        <li>我的名字是{identity.firstName}.</li>
+        <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
         {
-            goal === 3 ? (
-                <p>我的目标是在三天内完成。</p>
-            ) : (
-                <p>我的目标不是 3 天。</p>
+            identity.hobbies.length >= 2 && (
+                <li>
+                    我的两个习惯：{identity.hobbies[0]}和
+                    {identity.hobbies[1]}
+                </li>
             )
         }
+    </ul>
+    <p>我的技能：</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
 
-        <Footer />
-    </body>
-</html>
+    {happy && <p>我非常乐意学习 Astro！</p>}
+
+    {finished && <p>我完成了这节教程！</p>}
+
+    {
+        goal === 3 ? (
+            <p>我的目标是在三天内完成。</p>
+        ) : (
+            <p>我的目标不是 3 天。</p>
+        )
+    }
+
+</BaseLayout>
